@@ -1,0 +1,105 @@
+/*-Consultas simples-*/
+
+SELECT * FROM movies;
+
+---------------------------------
+
+SELECT * FROM actors;
+
+---------------------------------
+
+SELECT title FROM movies;
+
+---------------------------------
+
+SELECT first_name, last_name FROM actors;
+
+---------------------------------
+
+SELECT * FROM movies 
+WHERE release_date > '2000-01-01';
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE release_date > '2000-01-01'
+AND release_date < '2010-01-01';
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE title LIKE 'Toy Story';
+
+---------------------------------
+
+SELECT * FROM actors
+WHERE first_name LIKE 'Mark';
+
+---------------------------------
+
+SELECT * FROM actors
+WHERE first_name NOT LIKE 'Mark';
+
+---------------------------------
+
+SELECT * FROM actors
+WHERE first_name NOT LIKE 'Mark'
+OR first_name NOT LIKE 'Sam';
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE release_date > '2000-01-01'
+OR release_date > '2009-01-01'
+AND id > '10';
+
+---------------------------------
+
+/*-Order BY & LIMIT-*/
+
+SELECT * FROM actors
+ORDER BY first_name ASC; 
+
+---------------------------------
+
+SELECT * FROM actors
+ORDER BY first_name, last_name ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+ORDER BY release_date ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE release_date >= '2000-01-01'
+ORDER BY title ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+LIMIT 5;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE release_date >= '2000-01-01'
+LIMIT 3;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE release_date >= '2000-01-01'
+ORDER BY title ASC
+LIMIT 3;
+
+---------------------------------
+
+SELECT * FROM actors
+WHERE id = 1;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE id = 21;

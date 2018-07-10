@@ -1,0 +1,238 @@
+/* Consultas WHERE */
+
+SELECT * FROM movies
+WHERE release_date BETWEEN '1999-10-01'
+AND '2004-12-31';
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE length BETWEEN 45 AND 150
+ORDER BY length ASC;
+
+---------------------------------
+
+SELECT * FROM actors
+WHERE first_name LIKE 'HE%'
+OR first_name LIKE 'TO%'
+ORDER BY first_name DESC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE title LIKE 'T%'
+ORDER BY title DESC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE title LIKE 'T%C'
+ORDER BY title ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE release_date > '2000-01-01'
+ORDER BY title ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE title LIKE '%-%'
+ORDER BY title ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE release_date LIKE '%-10-%'
+OR release_date LIKE '1999-%-%'
+ORDER BY release_date AND title DESC;
+
+---------------------------------
+
+SELECT * FROM actors
+WHERE first_name LIKE 'J%Y'
+ORDER BY first_name ASC;
+
+---------------------------------
+
+SELECT * FROM actors
+WHERE first_name LIKE '%AM'
+ORDER BY last_name ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE title LIKE '%Y%'
+OR title LIKE '%LA%'
+ORDER BY title ASC;
+
+---------------------------------
+
+SELECT * FROM actors
+WHERE (last_name LIKE '%de%'
+OR last_name LIKE '%ll%')
+AND first_name LIKE '%a%'
+ORDER BY first_name ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE (title LIKE 'Toy Story%'
+OR title LIKE 'Harry Potter%')
+AND length LIKE 120
+ORDER BY title ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE rating IN (8.3, 9.1, 9.0)
+ORDER BY rating ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE awards IN (2, 5, 7)
+ORDER BY awards DESC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE length > 0
+ORDER BY length ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE release_date NOT LIKE '%-07-%'
+ORDER BY release_date ASC;
+
+---------------------------------
+
+SELECT * FROM actors
+WHERE last_name LIKE '%K%'
+ORDER BY last_name ASC;
+
+---------------------------------
+
+SELECT * FROM movies
+WHERE length NOT LIKE '120'
+AND length NOT LIKE '180'
+ORDER BY title ASC;
+
+---------------------------------
+
+/*Alias​ ​de​ ​Campos​ y Tablas*/
+
+---------------------------------
+
+SELECT title AS 'Titulo de la Pelicula'
+FROM movies ORDER BY title ASC;
+
+---------------------------------
+
+SELECT id AS 'id_genero', 
+name AS 'nombre_genero' FROM genres 
+ORDER BY nombre_genero ASC;
+
+---------------------------------
+
+set sql_mode=PIPES_AS_CONCAT;
+SELECT concat('Actor: ', first_name) 
+AS 'Actors' FROM actors
+ORDER BY actors ASC;
+
+---------------------------------
+
+/*Combinaciones​ - ​Table​ ​Reference*/
+
+---------------------------------
+
+SELECT t1.title, t2.name
+FROM movies AS t1, genres AS t2
+WHERE t1.genre_id = t2.id
+ORDER BY name ASC;
+
+---------------------------------
+
+SELECT t1.title, t2.first_name
+FROM movies AS t1, actors AS t2
+ORDER BY title ASC;
+
+---------------------------------
+
+SELECT t1.first_name, t1.last_name, t2.title, t3.actor_id, t3.movie_id
+FROM actors AS t1, movies AS t2, actor_movie AS t3
+WHERE t1.id = t3.actor_id
+AND t2.id = t3.movie_id;
+
+---------------------------------
+
+/*JOINS*/
+
+---------------------------------
+
+SELECT t1.title, t2.name
+FROM movies AS t1
+INNER JOIN genres AS t2 ON t1.genre_id = t2.id
+ORDER BY title ASC;
+
+---------------------------------
+
+SELECT t1.first_name, t2.title
+FROM actors AS t1, movies AS t2
+INNER JOIN actor_movie AS t3 
+WHERE t1.id = t3.actor_id
+AND t2.id = t3.movie_id
+ORDER BY first_name ASC;
+
+---------------------------------
+
+SELECT t1.first_name, t1.last_name, t2.title
+FROM actors AS t1, movies AS t2
+INNER JOIN actor_movie AS t3
+WHERE t1.id = t3.actor_id 
+AND t2.id = t3.movie_id;
+
+---------------------------------
+
+SELECT t1.name
+FROM genres AS t1
+INNER JOIN movies AS t2 
+ON t2.genre_id = t1.id
+ORDER BY title DESC;
+
+---------------------------------
+
+SELECT t1.title, t2.name, t3.first_name, t3.last_name
+FROM movies AS t1, genres AS t2, actors AS t3
+INNER JOIN actor_movie AS t4 
+WHERE t1.id = t4.movie_id
+AND t2.id = t1.genre_id 
+AND t3.id = t4.actor_id;
+
+---------------------------------
+
+SELECT t1.title, t2.name
+FROM movies AS t1
+INNER JOIN genres AS t2
+ON t1.genre_id = t2.id
+ORDER BY title ASC;
+
+---------------------------------
+
+SELECT t1.first_name, t2.title
+FROM actors AS t1, movies AS t2
+INNER JOIN actor_movie AS t3
+WHERE t1.id = t3.actor_id
+AND t2.id = t3.movie_id
+ORDER BY title ASC;
+
+---------------------------------
+
+SELECT t1.title, t2.name
+FROM movies AS t1
+INNER JOIN genres AS t2
+ON t1.genre_id = t2.id
+ORDER BY title ASC;
+

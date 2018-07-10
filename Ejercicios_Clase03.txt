@@ -1,0 +1,190 @@
+/* Agregacion de datos */
+
+---------------------------------
+
+SELECT name, COUNT(title)
+FROM genres, movies
+WHERE genres.id = movies.genre_id
+GROUP BY name;
+
+---------------------------------
+
+SELECT name, MIN(rating)
+FROM genres, movies
+WHERE genres.id = movies.genre_id
+GROUP BY name;
+
+---------------------------------
+
+SELECT name, MAX(rating)
+FROM movies
+INNER JOIN genres 
+ON genres.id = movies.genre_id
+GROUP BY name;
+
+---------------------------------
+
+SELECT name, AVG(rating)
+FROM movies
+INNER JOIN genres
+ON movies.genre_id = genres.id
+GROUP BY name;
+
+---------------------------------
+
+SELECT series.title, COUNT(number)
+FROM series, seasons
+WHERE series.id = seasons.serie_id
+GROUP BY series.title;
+
+---------------------------------
+
+SELECT series.title, COUNT(episodes.number)
+FROM seasons, series, episodes
+WHERE seasons.serie_id = series.id
+AND seasons.id = episodes.season_id
+GROUP BY series.title;
+
+---------------------------------
+
+/*
+
+---------------------------------
+
+SELECT series.title, seasons.number genres.name, COUNT(actor_episode.actor_id)
+FROM series, seasons, genres, episodes, actor_episode, actors
+WHERE episodes.season_id = seasons.id
+AND seasons.serie_id = series.id
+AND series.genre_id = genres.id
+AND actor_episode.actor_id = actors.id
+AND actor_episode.episode_id = episodes.id
+GROUP BY series.title;
+
+---------------------------------
+*/
+
+---------------------------------
+
+SELECT * FROM seasons;
+
+---------------------------------
+
+SELECT genres.name, COUNT(movies.rating)
+FROM genres, movies
+WHERE movies.genre_id = genres.id
+AND movies.rating > 5
+GROUP BY genres.name;
+
+---------------------------------
+
+SELECT genres.name, AVG(movies.rating)
+FROM genres, movies
+WHERE movies.genre_id = genres.id
+AND movies.rating > 5
+GROUP BY genres.name;
+
+---------------------------------
+
+SELECT series.title, COUNT(episodes.number)
+FROM series, episodes, seasons
+WHERE episodes.season_id = seasons.id
+AND seasons.serie_id = series.id
+GROUP BY series.title;
+
+---------------------------------
+
+SELECT series.title, COUNT(episodes.number)
+FROM series, episodes, seasons
+WHERE episodes.season_id = seasons.id
+AND seasons.serie_id = series.id
+AND episodes.release_date = '2016-01-01'
+GROUP BY series.title;
+
+---------------------------------
+
+SELECT series.title, COUNT(episodes.number)
+FROM series, episodes, seasons
+WHERE episodes.season_id = seasons.id
+AND seasons.serie_id = series.id
+AND episodes.release_date = '2017-01-01'
+GROUP BY series.title;
+
+---------------------------------
+
+/* Subqueries */
+
+---------------------------------
+
+SELECT actors.first_name, actors.last_name
+FROM actors, movies
+WHERE movies.title LIKE '%t%'
+AND (SELECT actors.favorite_movie_id = movies.id);
+
+---------------------------------
+
+SELECT actors.id, actors.first_name, actors.last_name, 
+actors.favorite_movie_id, movies.title, movies.id
+FROM actors, movies WHERE movies.title LIKE '%t%' 
+AND (SELECT actors.favorite_movie_id = movies.id);
+
+---------------------------------
+
+SELECT genres.name, series.title, seasons.title, 
+episodes.title, episodes.release_date
+FROM genres, series, seasons, episodes
+WHERE episodes.season_id = seasons.id 
+AND seasons.serie_id = series.id
+AND (SELECT episodes.release_date >= '2013-01-01')
+ORDER BY series.title;
+
+---------------------------------
+
+/* Exists */
+
+/*
+
+---------------------------------
+
+SELECT a.first_name, a.last_name, a.favorite_movie_id
+FROM actors AS a
+WHERE EXISTS (
+	SELECT a.favorite_movie_id
+    WHERE a.favorite_movie_id IS NULL
+    );    
+
+*/
+
+---------------------------------
+    
+SELECT g.name
+FROM genres AS g, movies AS m
+WHERE EXISTS ( 
+	SELECT  m.genre_id
+    WHERE m.genre_id = g.id
+    AND m.genre_id IS NOT NULL
+    );
+
+---------------------------------
+
+SELECT g.name
+FROM genres AS g, series AS s
+WHERE EXISTS ( 
+	SELECT  s.genre_id
+    WHERE s.genre_id = g.id
+    AND s.genre_id IS NOT NULL
+    );
+
+---------------------------------
+/*
+
+---------------------------------
+
+SELECT g.name, s.genre_id
+FROM genres AS g, series AS s
+WHERE EXISTS (
+	SELECT g.id
+    WHERE g.id = s.genre_id
+	);
+    
+*/
+---------------------------------

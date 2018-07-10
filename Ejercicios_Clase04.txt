@@ -1,0 +1,183 @@
+/* Ejercictación DML */
+
+-------------------------------
+
+SELECT * FROM movies;
+
+-------------------------------
+
+INSERT INTO movies (id, created_at, updated_at, title, rating, awards, release_date, length, genre_id)
+VALUES (22, NULL, NULL, 'Una cuestión de tiempo', 9.7, 3, '2013-09-04', 120, NULL);
+
+-------------------------------
+
+INSERT INTO movies (id, created_at, updated_at, title, rating, awards, release_date, length, genre_id)
+VALUES (23, NULL, NULL, 'Heat', 9.3, 3, '1995-04-10', 160, NULL);
+
+-------------------------------
+
+INSERT INTO movies (id, created_at, updated_at, title, rating, awards, release_date, length, genre_id)
+VALUES (24, NULL, NULL, 'Dream of life', 9, 4, '2008-06-20', 190, NULL);
+
+-------------------------------
+
+INSERT INTO movies (id, created_at, updated_at, title, rating, awards, release_date, length, genre_id)
+VALUES (25, NULL, NULL, 'Made of Stone', 8.5, 4, '2012-08-03', 180, NULL);
+
+-------------------------------
+
+INSERT INTO movies (id, created_at, updated_at, title, rating, awards, release_date, length, genre_id)
+VALUES (26, NULL, NULL, 'I am Not There', 7.9, 3, '2007-09-03', 190, NULL);
+
+-------------------------------
+
+SELECT * FROM movies
+ORDER BY release_date ASC;
+
+-------------------------------
+
+INSERT INTO movies (id, created_at, updated_at, title, rating, release_date, length, genre_id)
+VALUES (27, NULL, NULL, 'Cloverfield', 4, '2008-07-22', 160, NULL);
+
+-------------------------------
+
+INSERT INTO movies (id, created_at, updated_at, title, rating, release_date, length, genre_id)
+VALUES (28, NULL, NULL, 'IT', 8, '2017-07-29', 150, NULL);
+
+-------------------------------
+
+INSERT INTO movies (id, created_at, updated_at, title, rating, release_date, length, genre_id)
+VALUES (29, NULL, NULL, 'Cars', 4, '2006-04-19', 160, NULL);
+
+-------------------------------
+
+INSERT INTO movies (id, created_at, updated_at, title, rating, release_date, length, genre_id)
+VALUES (30, NULL, NULL, 'Los simpsons', 4, '2010-03-27', 180, NULL);
+
+-------------------------------
+
+INSERT INTO movies (id, created_at, updated_at, title, rating, release_date, length, genre_id)
+VALUES (31, NULL, NULL, 'Caballeros del Zodiaco', 8, '2012-09-28', 180, NULL);
+
+-------------------------------
+
+SELECT * FROM actors;
+
+-------------------------------
+
+INSERT INTO actors (id, created_at, updated_at, first_name, last_name, rating, favorite_movie_id)
+VALUES (50, NULL, NULL, 'Domhnall', 'Gleeson', 6.7, 22);
+
+-------------------------------
+
+INSERT INTO actors (id, created_at, updated_at, first_name, last_name, rating, favorite_movie_id)
+VALUES (51, NULL, NULL, 'Alfredo', 'Pacino', 9.8, 23);
+
+-------------------------------
+
+INSERT INTO actors (id, created_at, updated_at, first_name, last_name, rating, favorite_movie_id)
+VALUES (52, NULL, NULL, 'Patti', 'Smith', 8.6, 24);
+
+
+-------------------------------
+
+INSERT INTO actors (id, created_at, updated_at, first_name, last_name, rating, favorite_movie_id)
+VALUES (53, NULL, NULL, 'Ian', 'Brown', 7.9, 25);
+
+-------------------------------
+
+INSERT INTO actors (id, created_at, updated_at, first_name, last_name, rating, favorite_movie_id)
+VALUES (54, NULL, NULL, 'Cate', 'Blanchett', 9.8, 26);
+
+-------------------------------
+
+SELECT * FROM actors;
+
+-------------------------------
+
+INSERT INTO actors (id, created_at, updated_at, first_name, last_name, favorite_movie_id)
+VALUES (55, NULL, NULL, 'Jim', 'Carrey', 23);
+
+-------------------------------
+
+INSERT INTO actors (id, created_at, updated_at, first_name, last_name, favorite_movie_id)
+VALUES (56, NULL, NULL, 'Ricardo', 'Darin', 7);
+
+-------------------------------
+
+INSERT INTO actors (id, created_at, updated_at, first_name, last_name, favorite_movie_id)
+VALUES (57, NULL, NULL, 'Adam', 'Sandler', 8);
+
+-------------------------------
+
+INSERT INTO actors (id, created_at, updated_at, first_name, last_name, favorite_movie_id)
+VALUES (58, NULL, NULL, 'Drew', 'Barrymore', 15);
+
+-------------------------------
+
+INSERT INTO actors (id, created_at, updated_at, first_name, last_name, favorite_movie_id)
+VALUES (59, NULL, NULL, 'Megan', 'Fox', 26);
+
+-------------------------------
+
+SELECT m.title, a.first_name, a.last_name
+FROM actors AS a, movies AS m
+WHERE a.favorite_movie_id = m.id
+AND m.id > 22
+ORDER BY title ASC;
+
+-------------------------------
+
+/*
+
+-------------------------------
+
+UPDATE movies
+SET awards = 0
+WHERE id > 0;
+
+-------------------------------
+*/
+
+
+/*
+
+-------------------------------
+
+UPDATE movies
+SET awards = 2
+WHERE release_date >= '2001-01-01'
+AND release_date <= '2001-12-31';
+
+-------------------------------
+
+*/
+
+-------------------------------
+
+UPDATE movies
+SET awards = 0
+WHERE id >= 0;
+
+-------------------------------
+
+DELETE FROM movies
+WHERE id = 31;
+
+-------------------------------
+
+DELETE FROM movies
+WHERE id = 22;
+
+-------------------------------
+
+UPDATE actors
+SET favorite_movie_id = NULL
+WHERE id = 54;
+
+-------------------------------
+
+DELETE FROM movies
+WHERE id = 26;
+
+-------------------------------
